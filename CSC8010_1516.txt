@@ -1,0 +1,81 @@
+Q1
+--------------------
+a)
+i)
+10 D
+
+ii)
+''
+
+iii)
+1
+
+b)
+i)
+￡(15[0-4]|1[0-4]\d|[1-9]\d|[1-9])(\.\d{2})?$
+
+ii)
+([0-9a-z])+(\.[0-9a-z]+)*@[0-9a-z]+\.(com|ac\.uk)?
+
+iii)
+\b([a-z]{4}tion|[a-z]{6}able)\b
+
+iv)
+\b([aeiou]*[^aeiou]{3,}){2,}[aeiou]*\b
+
+Q2
+--------------------
+a)
+i)
+experiment/raw/2015-03-24.dat experiment/raw/2015-04-06 experiment/raw/exper4.txt
+
+ii)
+experiment/raw/2015-02-11.dat experiment/raw/2015-03-24.dat
+
+iii)
+remove directory experiment and its files and directory inside.
+
+iv)
+4
+
+v)
+rmdir: directory: Directory not empty
+
+b)
+the number of txt files characters in raw directory. If the number is larger than 1000, user, group and others add read permission.
+
+c)
+write programs that do one thing and do it well
+write programs to work together
+write programs to handle text streams, because that is a universal interface.
+
+Q3
+--------------------
+b)
+i)
+5
+
+ii)
+1.5
+
+Q4
+--------------------
+a)
+i)
+135
+
+ii))
+111001011
+
+iii)
+the result of an integer calculation is bigger than the allowed maximum(both positive and negative)
+
+b)
+i)
+B5
+
+ii)
+3004
+
+iii)
+1F4A

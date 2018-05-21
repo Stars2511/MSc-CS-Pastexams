@@ -1,0 +1,53 @@
+Q2
+------------------------------------
+a) 
+ManufacturerCode, ProductCode
+they can unique identify an entity in the set.
+
+c)
+i)
+SELECT Phone, Street
+FROM Manufactures
+WHERE Town = 'Durham';
+
+ii)
+DELETE
+FROM Manufactures
+WHERE Name = 'Beautiful Bathrooms';
+INSERT INTO Manufactures(Name, Street, Town, Postcode, M_code, Phone)
+VALUES('Heavenly Homes', 'Eldon Square', 'Newcastle','BBNEW','0191 222 4444');
+
+iii)
+SELECT *
+FROM Products
+WHERE price = (
+    SELECT MAX(price) AS expensive
+    FROM Products
+);
+
+
+Q3
+------------------------------------
+a)
+advantages;
+1. Data consistency
+2. Economy of scale
+3. Improved security
+disadvantages:
+1. Cost of DBMSs
+2. Size
+3. Performance
+
+b)
+Schema: a description of data in terms of a data model
+
+c)
+Purpose:
+1. To avoid redundancy by storing each 'fact' within the database only once
+2. To put data into a form that conforms to relational principles - no repeating groups
+3. TO put the data into a form that is more able to accurately accommodate change
+4. To avoid certain updating 'anomalies'
+5. To facilitate the enforcement of data constraints
+
+Redundant data, Update Anomalies
+

@@ -1,0 +1,81 @@
+Q1
+--------------------
+a)
+i)
+1476707729-5804c5642b2cf
+
+ii)
+1476707729-5804c
+
+iii)
+1476707729-5804c
+
+b)
+i)
+[1-9],\b{3},\b{3}|[1-9]\b{2},\b{3}|[1-9]\b{2}|99
+
+ii)
+[A-Z]{2}\d{6}[A-Z]
+
+iii)
+\b([a-z]*in[a-z]*of[a-z]*|([a-z]*of[a-z]*in[a-z]*))\b
+
+iv)
+\b(?<first>[a-z])(?<second>[a-z])[a-z]\k<second>\k<first>\b
+
+Q2
+--------------------
+a)
+i)
+novel/save/Attributes.txt  novel/save/indexA.txt
+
+ii)
+novel/chapter2.docx  novel/chapter3.docx
+
+iii)
+rmdir: novel: Directory not empty
+
+iv)
+5
+
+v)
+remove save directory and its files inside.
+
+b)
+copy draft.pdf to a new file draft.pdf4 in save directory.
+
+c)
+writes programs that do one thing and do it well
+writes programs to work together
+writes programs to handle text streams, because that is a universal interface
+
+Q3
+--------------------
+b)
+i)
+3
+
+ii)
+1.3
+
+Q4
+--------------------
+a)
+i)
+199
+
+ii)
+111000110
+
+iii)
+the result of an integer calculation is bigger than the allowed maximum(both positive and negative)
+
+b)
+i)
+7E
+
+ii)
+8010
+
+iii)
+9DD

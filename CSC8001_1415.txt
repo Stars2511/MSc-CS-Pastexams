@@ -1,0 +1,190 @@
+B1
+------------------------------------
+a)
+public double averageSpeed()
+{
+    double speed;
+    speed = distance/(duration/3600);
+    return speed;
+}
+
+b)
+public Log(String name)
+{
+    this.name = name;
+    this.activities = new ArrayList<Activity>();
+}
+
+c)
+public void addActivity(double t, double d, String w)
+{
+    Activity newActivity = new Activity(t,d,w);
+    activities.add(newActivity);
+}
+or
+public void addActivity(Activity newActivity)
+{
+    activities.add(newActivity);
+}
+
+d)
+public Activity bestSpeed()
+{
+    Activity topAct;
+    topAct = activities.get(0);
+    for(int i = 1; i < activities.size(); i++)
+    {
+        if(activities.get(i).averageSpeed() > topAct.averageSpeed()){
+            topAct = activities.get(i); 
+        }
+    }
+    // u can check if activities have no Activity and if there are two or more Activity have a same average speed;
+    return topAct;
+}
+
+e)
+HashMap
+private HashMap<Activity,String> activities;
+
+B2
+------------------------------------
+a)
+public class Employee 
+{
+    private String name;
+    private int number;
+    private String address;
+    private String designation;
+    private String department;
+    private double salary;
+
+    public Employee(String name, int number, String address, String designation, String department, double salary)
+    {
+        this.name = name;
+        this.number = number;
+        this.address = address;
+        this.designation = designation;
+        this.department = department;
+        this.salary = salary;
+    }
+
+    public String getName()
+    {
+        return this.name;
+    }
+
+    public int getNumber()
+    {
+        return this.number;
+    }
+
+    public String getAddress()
+    {
+        return this.address;
+    }
+
+    public String getDesignation()
+    {
+        return this.designation;
+    }
+
+    public String getDepartment()
+    {
+        return this.department;
+    }
+
+    public double getSalary()
+    {
+        return this.salary;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public void setNumber(int number)
+    {
+        this.number = number;
+    }
+
+    public void setAddress(String address)
+    {
+        this.address = address;
+    }
+
+    public void setDesignation(String designation)
+    {
+        this.designation = designation;
+    }
+
+    public void setDepartment(String department)
+    {
+        this.department = department;
+    }
+
+    public void setSalary(double salary)
+    {
+        this.salary = salary;
+    }
+}
+
+b)
+public class Permanent extends Employee{
+    private String startDate;
+
+    public Permanent(String name, int number, String address, String designation, String department, double salary, String startDate){
+        super(name, number, address, designation, department, salary);
+        this.startDate = startDate;
+    }
+
+    public String getStartDate(){
+        return startDate;
+    }
+
+    public void setStartDate(String startDate){
+        this.startDate = startDate;
+    }
+}
+
+public class FixedTerm extends Employee{
+    private String duration;
+
+    public FixedTerm(String name, int number, String address, String designation, String department, double salary, String duration){
+        super(name, number, address, designation, department, salary);
+        this.duration = duration;
+    }
+
+    public String getDuration(){
+        return duration;
+    }
+
+    public void setDuration(String duration){
+        this.duration = duration;
+    }
+}
+
+c)
+public static void z(ArrayList<Employee> employees)
+{
+    String names = "";
+    int allSalary = 0;
+
+    for (int i = 0; i < employees.size(); i++)
+    {
+        if (employees.get(i).getDepartment().equal("Zoology"))
+        {
+            if (employees.get(i) instanceof Permanent)
+            {
+                names = names + employees.get(i).getName() + "\n";
+            }
+            allSalary = allSalary + employees.get(i).getSalary();
+        }
+    }
+
+    System.out.println("all emplyees on Permanent contracts in the department of Zoology are");
+    System.out.println(names);
+    System.out.println("the total salary of that department is");
+    System.out.println(allSalary);
+}
+

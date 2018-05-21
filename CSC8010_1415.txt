@@ -1,0 +1,102 @@
+Q1
+--------------------
+a)
+Explain:
+i)
+he qu c brown fox u ps over the azy dog
+
+ii)
+h e q u c b r o w n f o x u p s o v e r t h e a z y d o g
+
+iii)
+h e q u c b r o w n f o x u p s o v e r t h e a z y d o g
+
+b)
+i)
+\b[^b-df-hj-np-tv-z]+\b
+
+ii)
+\b[a-z]*q(?!u)[a-z]*\b
+
+iii)
+\b[a-z]{4}ing|[a-z]{5}tion\b
+
+iv)
+\b([a-z]*[aeiou]{2}){2,}[a-z]*\b
+
+Q2
+--------------------
+a)
+i)
+(output)test/results.pdf
+
+test/results:
+test1Results test2Results
+
+ii)
+(output)test/results/test1Results test/results/test2Results
+
+iii)
+(output)rmdir: test: Directory not empty
+
+iv)
+(output)
+no result, but firstest.java,firsttest.class,results.pdf,secondtest.java and secondtest.class files have been deleted.
+
+v)
+(output)rm: test/results: is a directory
+all the files will be deleted, but the directory won't.
+
+b)
+2
+
+c)
+Make sure you can execute the script.
+Use the chmod command to do this: chmod u+x myct
+
+d)
+ls $2/*.$1 | wc -l
+e)
+write programs that do one thing and do it well
+write programs to work together
+write programs to handle text streams, because that is a universal interface
+
+Q3
+--------------------
+a)
+v ii i iii iv
+
+b)
+3 1.2
+
+c)
+durable & lower power & very fast
+finite number of write cycles
+
+d)
+Infrastrucure as a Service(IaaS): The consumer uses "fundamental computing resources" such as processing power, storage, networking.
+Platform as a Service(PaaS): The consumer uses a hosting environment for their applications.
+Software as a Service(SaaS): The consumer uses an application, but does not control the operating system, hardware or network infrastructure.
+
+
+Q4
+--------------------
+a)
+i)
+229
+
+ii))
+101001011
+
+iii)
+the result of an integer calculation is bigger than the allowed maximum(both positive and negative)
+
+b)
+i)
+5B
+
+ii)
+2492
+
+iii)
+1001

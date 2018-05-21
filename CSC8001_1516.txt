@@ -1,0 +1,156 @@
+B1
+------------------------------------
+a)
+i)
+The fields of the class Photo and PhotoAlbum are public, it makes modules strong coupling, weak cohesion and access internal data from outside which is not a good object oriented design. the fields should be private, so it is strong cohesion and weak coupling.
+
+ii)
+public class Photo
+{
+    private String dateTaken;
+    private String title
+
+    public Photo(String date, String picTitle)
+    {
+        dateTaken = date;
+        title = picTitle;
+    }
+
+    public String getDate()
+    {
+        return dateTaken;
+    }
+
+    public String getTitle()
+    {
+        return title;
+    }
+}
+
+public class PhotoAlbum
+{
+    private String name;
+    private ArrayList<Photo> photos;
+
+    public PhotoAlbum(String albumName)
+    {
+        name = albumName;
+        photos = new ArrayList<Photo>();
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public ArrayList<Photo> getPhotos(){
+        return photos;
+    }
+
+    /*
+    * same as above
+    */
+}
+
+b)
+The printDetails method is not related to the PhotoAlbum class. These two methods belongs to an instance of the class PhotoAlbum, not a class. 
+I suggest create a new class which store an instance of class PhotoAlbum, and the class PhotoAlbum should offers a access method of get photos.
+
+c)
+import java.util.ArrayList;
+
+public class Photo{
+    private String dateTaken;
+    private String title;
+    private ArrayList<String> tags;
+
+    public Photo(String date, String picTitle)
+    {
+        dateTaken = date;
+        title = picTitle;
+        tags = new ArrayList<String>();
+    }
+
+    public String getDate()
+    {
+        return dateTaken;
+    }
+
+    public String getTitle()
+    {
+        return title;
+    }
+
+    public ArrayList<String> getTags()
+    {
+        return tags;
+    }
+
+    public void addTag(String newTag)
+    {
+        tags.add(newTag);
+    }
+}
+
+B2
+------------------------------------
+public abstract class AbstractAccount implements Account
+{
+    private int balance;
+    private int accountNumber;
+
+    public AbstractAccount(int balance, int accountNumber)
+    {
+        this.balance = balance;
+        this.accountNumber = accountNumber;
+    }
+
+    public int getBalance(){
+        return balance;
+    }
+
+    public int getAccountNumber(){
+        return accountNumber;
+    }
+
+    public void deposit(int amount){
+        balance = balance + amount;
+    }
+
+    public int withdraw(int amount){
+        balance = balance - amount;
+        return amount;
+    }
+}
+
+public class FreeAccount extends AbstractAccount
+{
+    public FreeAccount(int balance, int accountNumber)
+    {
+        super(balance, accountNumber);
+    }
+
+    public int withdraw(int amount){
+        if (amount > super.getBalance()){
+            return 0;
+        }else{
+            return super.withdraw(amount);
+        }
+    }
+}
+
+public class OverdraftAccount extends AbstractAccount
+{
+    public OverdraftAccount(int balance, int accountNumber)
+    {
+        super(balance, accountNumber);
+    }
+
+    public int withdraw(int amount){
+        if (amount > super.getBalance()){
+            return super.withdraw(amount + 10) - 10;
+        }else{
+            return super.withdraw(amount);
+        }
+    }
+}

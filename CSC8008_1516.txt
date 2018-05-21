@@ -1,0 +1,48 @@
+Q2
+------------------------------------
+a)
+File-Based systems limitation:
+1. Separation and isolation of data
+2. Duplication of data
+3. Independence of programs and files
+4. Incompatible file formats
+5. Fixed Queries/Proliferation of application programs
+
+b)
+i)
+Entity: An entity is a real-world object that is distinguishable from other objects
+
+ii)
+attributes: values are used to distinguish one entity from another of the same type.
+
+iii)
+Primary key: a minimal set of attributes whose values can uniquely identify an entity in the set
+
+
+Q3
+------------------------------------
+a)
+CREATE TABLE Courses(
+    course_ID int(10) NOT NULL AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    day VARCHAR(10) NOT NULL,
+    time VARCHAR(10) NOT NULL
+    PRIMARY KEY (course_ID)
+)ENGINE=InnoDB;
+
+b)
+SELECT S.availability C.time C.name 
+FROM Schedule S, Courses C
+WHERE S.course_ID = C.course_ID;
+
+c)
+DELETE
+FROM Courses
+WHERE name = 'Bicycle Spinning', day = 'Thursday', time = '7:30pm';
+INSERT INTO Courses(name,day,time)
+VALUES('Speed Yoga','Wednesday','4pm');
+
+d)
+SELECT *
+FROM Bookings B,
+WHERE B.name = 'Ab Cruncher';

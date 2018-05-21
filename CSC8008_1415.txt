@@ -1,0 +1,41 @@
+Q2
+------------------------------------
+a)
+Name, Bus ID, Route number
+they can unique identify an entity in the set.
+
+c)
+i)
+SELECT Name, Phone
+FROM Bus Operators
+WHERE Town = "Durham";
+
+ii)
+SELECT Route Number, Frequency
+FROM Bus Routes
+WHERE Operator = "Diamond Buses";
+
+iii)
+DELECT
+FROM Bus Operators
+WHERE Name = "Lockey's";
+
+INSERT INTO Bus Operators(Name, Street, Town, Postcode, Phone)
+VALUES('StageCoach','Eldon Square', 'Newcastle', 'NE1 7RY', '0191 222 4444');
+
+iv)
+SELECT SUM(Frequency) AS Journey_Amounts
+FROM Bus Routes
+WHERE Operator = "Bond Brother";
+
+Q3
+------------------------------------
+b)
+Because they are Foreign Keys, they needs to tell the system where are they reference FROM
+
+c)
+Foreign Key: a set of fields in one relation that is used to 'refer' to a tuple in another relation
+
+
+
+

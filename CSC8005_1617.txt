@@ -1,0 +1,27 @@
+Q1
+--------------------
+b)
+Advantages:
+This model is simple and easy to understand and use.
+It is easy to manage due to the rigidity of the module - each phase has specific deliverables and a review process
+In this model phases are processed and completed one at a time. Phases don't overlap.
+Waterfall model works well for smaller projects where requirements are very well understood.
+
+Disadvantages:
+Once an application is in a testing stage, it is difficult to go back and change something that was not well-thought out in the concept stage.
+No working software is produced until late during the life cycle.
+High amounts of risks and uncertainty.
+Not a good model for complex and object-oriented project.
+Poor model for long and ongoing projects.
+Not suitable for the projects where requirements are at a moderate to high risk of changing.
+
+
+Q2
+--------------------
+a)
+* Build prototypes
+* Structural and behavioural models
+* Draw up risk checklists and requirements document
+allow users to see how well the system supports their work.
+represent the system from different perspectives
+Very expressive, easy to use, understood by developers and customers.

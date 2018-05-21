@@ -1,0 +1,121 @@
+B1
+------------------------------------
+a)
+public boolean includes(String text)
+{
+    if (subject.indexOf(text) > -1 || contents.indexOf(text) > -1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+b)c)d)
+public class Journel
+{
+    private String name;
+    private ArrayList<Note> notes;
+
+    public Journel(String name)
+    {
+        this.name = name;
+        notes = new ArrayList<Note>();
+    }
+
+    public void addNote(String topic, String words)
+    {
+        Note newNote = new Note(topic, words);
+        notes.add(newNote);
+    }
+
+    public int notesContaining(String text)
+    {
+        int count = 0
+        for (int i = 0; i < notes.size(); i++){
+            if(notes.get(i).includes(text))
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+}
+
+B2
+------------------------------------
+public class Worker
+{
+    private static final int WEEKLY_HOURS = 40;
+    private String name;
+    private double salaryRate;
+
+    public Worker(String name, double salaryRate)
+    {
+        this.name = name;
+        this.salaryRate = salaryRate;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public double salaryRate(){
+        return salaryRate;
+    }
+
+    public double computePay(int hours)
+    {
+        return salaryRate * hours;
+    }
+}
+
+public class HourlyWorker extends Worker{
+    public HourlyWorker(String name, double salaryRate)
+    {
+        super(name,salaryRate);
+    }
+
+    public double computePay(int hours){
+        if(hours < WEEKLY_HOURS){
+            return super.computePay(hours);
+        }else{
+            return super.computePay(WEEKLY_HOURS) + super.computePay(hours - WEEKLY_HOURS) * 2;
+        }
+    }
+}
+
+public class SalariedWorker extends Worker{
+    public SalariedWorker(String name, double salaryRate)
+    {
+        super(name,salaryRate);
+    }
+
+    public double computePay(int hours){
+        return super.computePay(WEEKLY_HOURS);
+    }
+}
+
+public class Test{
+    public static void main(String[] args){
+        Worker Ivan = new HourlyWorker("Fan Wan", 100.5);
+        Worker Ryan = new SalariedWorker("Xiaoyong", 120.5);
+        System.out.println(weeklyReport(Ivan,45));
+        System.out.println(weeklyReport(Ryan,45));
+    }
+
+    public static String weeklyReport(Worker w, int hours){
+        String report = "", contract;
+
+        if(w instanceof HourlyWorker){
+            contract = "hourly worker;\n"
+        }else if(w instanceof SalariedWorker){
+            contract = "salaried worker;\n"
+        }
+        report = w.getName() + ';\n' + contract + "earned:" + w.computePay(hours) + ";";
+
+        return report;
+    }
+}
