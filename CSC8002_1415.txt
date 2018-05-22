@@ -3,7 +3,7 @@ SECTION A
 QA1
 -----------------------------------------
 a)
-
+If you pass a parameter of a type that is mutable, then if you just copy that straight into the class then you can change it - i.e gives access to internal state - def copying is making a copy of that parameter before storing it internally.
 
 b)
 A class is immutable if its instances cannot be modified
@@ -20,10 +20,10 @@ Because final Class cannot be inherited
 ii)
 For instances of Student
 1. they provide mutator methods that modify object state
-2. they provide access methods that access all the state of the instance.
+2. fields are not final
 For instances of Tutor
 1. field name is not final
-2.
+2. Tutor does not defensively copy
 
 iii)
 public final class Tutor{
@@ -51,9 +51,9 @@ public final class Tutor{
     }
 }
 iv)
-1. Do not provide mutator methods that modify object state
+1. Remove set methods that modify object state
 2. Make all fields final
-It's not neccessary to re-write the Tutor class. Because Tutor class already provide an immutable wrapper for the collection.
+Yes, it's neccessary to re-write the Tutor class. Because tutees is still mutable.
 
 QA2
 -----------------------------------------
