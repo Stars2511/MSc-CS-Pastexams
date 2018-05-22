@@ -26,7 +26,30 @@ For instances of Tutor
 2.
 
 iii)
+public final class Tutor{
+    private final name;
+    private final Set<Student> tutees;
 
+    public Tutor(String name, Student[] students){
+        this.name = name;
+        tutees = new TreeSet<Student>();
+        for(int i = 0; i < students.length; i++){
+            tutees.add(new Student(students[i].getName(), students[i].getCourse()));
+        }
+    }
+
+    public Set<Student> getTutees(){
+        Set newTutees = new TreeSet<Student>();
+        for(Student tutee: tutees){
+            newTutees.add(new Student(tutee[i].getName(), tutee[i].getCourse())));
+        }
+        return Collection.unmodifiableSet(newTutees);
+    }
+
+    public String getName(){
+        return name;
+    }
+}
 iv)
 1. Do not provide mutator methods that modify object state
 2. Make all fields final
@@ -155,13 +178,17 @@ In order to set up an event handler and deal with events, a Java programmer need
 
 c)
 // import neccessary packages
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+
 public class CylinderApplication implements ActionListener{
     private JFrame cylinderFrame;
     private JPanel cylinderPanel;
     private JTextField radiousTF, heightTF;
     private JButton calculateButton;
-    private JLabel volumeL;
-    private double volume;
+    private JTextField volumeTF;
+    private double volume = 0;
 
     public CylinderApplication(){
         cylinderFrame = new JFrame();
@@ -174,21 +201,22 @@ public class CylinderApplication implements ActionListener{
     }
 
     public void addWidgets(){
-        radiousTF = new JTextField();
-        heightTF = new JTextField();
-        calculateButton = new JButton();
-        volumeL = new JLabel(volume);
+        radiousTF = new JTextField(10);
+        heightTF = new JTextField(10);
+        calculateButton = new JButton("Calculate");
+        volumeTF = new JTextField(10);
         calculateButton.addActionListener(this);
         cylinderPanel.add(radiousTF);
         cylinderPanel.add(heightTF);
         cylinderPanel.add(calculateButton);
-        cylinderPanel.add(volumeL);
+        cylinderPanel.add(volumeTF);
     }
 
     public void actionPerformed(ActionEvent e){
         String radious = radiousTF.getText();
         String height = heightTF.getText();
         volume = (double)(Math.PI * Double.parseDouble(radious) * Double.parseDouble(radious) * Double.parseDouble(height));
+        volumeTF.setText(""+volume);
     }
 
     public static void main(String[] args){
