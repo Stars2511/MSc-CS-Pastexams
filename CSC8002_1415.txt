@@ -1,0 +1,200 @@
+SECTION A
+=========================================
+QA1
+-----------------------------------------
+a)
+
+
+b)
+A class is immutable if its instances cannot be modified
+Advantages:
+1. Immutables are simple and make good building blocks
+2. Immutables can be cached
+3. Immutables are thread-safe
+
+c)
+i)
+It's impossible.
+Because final Class cannot be inherited
+
+ii)
+For instances of Student
+1. they provide mutator methods that modify object state
+2. they provide access methods that access all the state of the instance.
+For instances of Tutor
+1. field name is not final
+2.
+
+iii)
+
+iv)
+1. Do not provide mutator methods that modify object state
+2. Make all fields final
+It's not neccessary to re-write the Tutor class. Because Tutor class already provide an immutable wrapper for the collection.
+
+QA2
+-----------------------------------------
+i)
+public class InstrumentedTreeSet extends TreeSet{
+
+}
+
+ii)
+
+iii)
+
+QA3
+-----------------------------------------
+a)
+i)
+
+ii)
+
+iii)
+
+b)
+
+c)
+
+d)
+
+e)
+
+SECTION B
+=========================================
+QB1
+-----------------------------------------
+a)
+To create a new thread of concurrent activity in a Java program, the programmer must:
+1. Define a new class that extends Thread or implements Runnable
+2. Provide a suitable implementation of a run methods
+3. Create an instance of the new class (and an instance of Thread if neccessary)
+4. Invoke the start method on the thread object
+
+b)
+public class ThreadOne extends Thread {
+    private final static times = 100;
+    public ThreadOne(){
+
+    }
+    public void run(){
+        for(int i = 1; i <= times; i++){
+            System.out.println(i);
+        }
+    }
+}
+public class ThreadTwo extends Thread {
+    private final static times = 40;
+    public ThreadTwo(){
+
+    }
+    public void run(){
+        for(int i = 0; i < times; i++){
+            System.out.println("A");
+        }
+    }
+}
+public class MainThread {
+    public static void main(String[] args){
+        Thread one = new ThreadOne();
+        Thread two = new ThreadTwo();
+        one.start();
+        two.start();
+    }
+}
+
+c)
+Two threads can access the same object if:
+1. it is a global (static) object.
+2. the object is defined in an enclosing scope(the threads are nested classes)
+3. the object's reference is passed as an argument to each thread
+To prevent interference, one needs to ensure that all accesses to the shared object are from within a critical section, implemented using the Java keyword, synchronized.
+
+QB2
+-----------------------------------------
+a)
+Monitors combine data encapsulation, mutual exclusion, and condition synchronization. The data structure encapsulated by the monitor is private, and can only be accessed via a set of public operations. Each operation acquires a lock associated with the monitor, thereby ensuring mutual exclusion and preventing interference. It is possible for operations to wait and signal conditions associated with the state of the monitor
+
+b)
+
+c)
+public class CarPark{
+    private final int capacity;
+    private int cars = 0;
+
+    public CarPark(int capacity){
+        this.capacity = capacity;
+    }
+
+    public synchronized void acquireEnter() throws InterruptedException{
+        while(cars = capacity){
+            wait();
+        }
+        cars++;
+    }
+
+    public synchronized void releaseLeave(){
+        if(cars > 0){
+            cars--;
+            notifyAll();
+        }
+    }
+}
+
+QB3
+-----------------------------------------
+a)
+Event driven programming involves writing programs whose flow of control depends on a sequence of external events rather than the internal control logic of the program itself.
+
+
+b)
+In order to set up an event handler and deal with events, a Java programmer needs to:
+1. define an event handling class that implements the appropriate "event listener" interface,
+2. provide the neccessary event handling code,
+3. register an instance of the event handling class with an event source by calling the appropriate "addListener" method.
+
+c)
+// import neccessary packages
+public class CylinderApplication implements ActionListener{
+    private JFrame cylinderFrame;
+    private JPanel cylinderPanel;
+    private JTextField radiousTF, heightTF;
+    private JButton calculateButton;
+    private JLabel volumeL;
+    private double volume;
+
+    public CylinderApplication(){
+        cylinderFrame = new JFrame();
+        cylinderPanel = new JPanel();
+        addWidgets();
+        cylinderFrame.setContentPane(cylinderPanel);
+        cylinderFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        cylinderFrame.pack();
+        cylinderFrame.setVisible(true);
+    }
+
+    public void addWidgets(){
+        radiousTF = new JTextField();
+        heightTF = new JTextField();
+        calculateButton = new JButton();
+        volumeL = new JLabel(volume);
+        calculateButton.addActionListener(this);
+        cylinderPanel.add(radiousTF);
+        cylinderPanel.add(heightTF);
+        cylinderPanel.add(calculateButton);
+        cylinderPanel.add(volumeL);
+    }
+
+    public void actionPerformed(ActionEvent e){
+        String radious = radiousTF.getText();
+        String height = heightTF.getText();
+        volume = (double)(Math.PI * Double.parseDouble(radious) * Double.parseDouble(radious) * Double.parseDouble(height));
+    }
+
+    public static void main(String[] args){
+        CylinderApplication cylinder = new CylinderApplication();
+    }
+
+}
+
+
