@@ -59,10 +59,28 @@ QA2
 -----------------------------------------
 i)
 public class InstrumentedTreeSet extends TreeSet{
+    private int removeCount;
 
+    public InstrumentedTreeSet(){
+        super();
+        this.removeCount = 0;
+    }
+
+    public void remove(){
+        if(super.remove()){
+            removeCount++;
+        }
+    }
+
+    public int getRemoveCount(){
+        return removeCount;
+    }
 }
 
 ii)
+
+
+Composition is not tied to the single-inheritance type hierarchy and is more powerful than sub-classing
 
 iii)
 
@@ -97,30 +115,41 @@ To create a new thread of concurrent activity in a Java program, the programmer 
 b)
 public class ThreadOne extends Thread {
     private final static times = 100;
-    public ThreadOne(){
-
+    private boolean sharedLock;
+    public ThreadOne(boolean lock){
+        sharedLock = lock
     }
     public void run(){
         for(int i = 1; i <= times; i++){
+            if(i > 50){
+                while(sharedLock){
+                    Thread.yield();
+                }
+            }
             System.out.println(i);
         }
     }
 }
 public class ThreadTwo extends Thread {
     private final static times = 40;
-    public ThreadTwo(){
+    private boolean sharedLock;
 
+    public ThreadTwo(boolean lock){
+        sharedLock = lock
     }
     public void run(){
         for(int i = 0; i < times; i++){
             System.out.println("A");
         }
+        sharedLock = false;
     }
 }
 public class MainThread {
+    public static boolean lock = true;
+
     public static void main(String[] args){
-        Thread one = new ThreadOne();
-        Thread two = new ThreadTwo();
+        Thread one = new ThreadOne(lock);
+        Thread two = new ThreadTwo(lock);
         one.start();
         two.start();
     }
