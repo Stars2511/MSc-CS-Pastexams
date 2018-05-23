@@ -57,6 +57,9 @@ Yes, it's neccessary to re-write the Tutor class. Because tutees is still mutabl
 
 QA2
 -----------------------------------------
+a)
+
+b)
 i)
 public class InstrumentedTreeSet extends TreeSet{
     private int removeCount;
@@ -88,18 +91,47 @@ QA3
 -----------------------------------------
 a)
 i)
+Hash set uses an object's integer hash code to index into an array and then allocate object to associated bucket
+Set constructors enforce set semantics, remove any duplicate entries
 
 ii)
+because one object corresponding one hash code.
+if hash code collisions the performance degrade
 
 iii)
+If hashCode and equals methods are incompatible then equal objects will hash to different positions in the hash table.
 
 b)
+public int compareTo(Name name){
+    int lastCompare = lastName.compareTo(name.getLastName());
+    if(lastCompare != 0){
+        return lastCompare
+    }
+    int firstCompare = firstName.compareTo(name.getFirstName());
+    return firstCompare;
+}
 
 c)
+public class NameComparator implements Comparator<Name>{
+    public int compare(Name nameOne, Name nameTwo){
+        int lastCompare = nameOne.getLastName().compareTo(nameTwo.getLastName());
+        if(lastCompare != 0){
+            return lastCompare
+        }
+        int firstCompare = nameOne.getFirstName().compareTo(nameTwo.getFirstName());
+        return firstCompare;
+    }
+}
 
 d)
+i)
+resiable array would be better. Because add at tail runs in constant time:O(1)
+II)
+linked list would be better. Because O(1) to re-arrange list: O(n)
 
 e)
+Because A set is a collection that cannot contain duplicate elements
+I would use HashSet. Because add, remove, contains and get are O(1) opertionns
 
 SECTION B
 =========================================
