@@ -3,8 +3,8 @@ SECTION A
 QA1
 -----------------------------------------
 a)
+a class that is declared by abstract keyword, it can have abstract and non-abstract methods
 abstract superclasses can define and may partially implement, common behaviour.
-
 
 b)
 That means method fin() cannot be overidden.
@@ -13,3 +13,117 @@ Because abstract methods compulsory we should override in child classes to provi
 
 c)
 the use of super() to call the constructor of the superclass.
+Because it will ensure that when a constructor is invoked, it can rely on all the fields in its superclass being initialised.
+
+d)
+Using the ‘new’ keyword helps you create a new instance of an object and reuse the variable it has been assigned to, later in the class as required
+
+e)
+"Root Con. called"
+"Sub Con. called"
+"Root Con. called"
+"Sub.f() called"
+"Root.fin() called"
+"Root.g() called"
+"different"
+
+f)
+The Object class is the superclass of every Java class. And it has equal method.
+public class Sub extends Root implements Comparable<Sub>{
+    private int data;
+    public Sub(int data){
+        super();
+        this.data = data;
+    }
+
+    public int getData{
+        return data;
+    }
+
+    public int compareTo(Sub b){
+        if(this.data > b.getData()){
+            return 1;
+        }
+        if(this.data < b.getData()){
+            return -1;
+        }
+        if(this.data == b.getData()){
+            return 0;
+        }
+    }
+}
+
+QA2
+-----------------------------------------
+a)
+
+b)
+A class is immutable if its instance cannot be modified
+
+c)
+i)
+Final class: one that you can't inherit from
+Final field: one initialized can't be changed
+
+ii)
+For Artical:
+1. it provides set methods
+2. the field can be changed after initialized, they are not final
+For Journal:
+Journal does not defensively copy
+
+iii)
+public final class Journal{
+    private final Set<Article> edition;
+    private final Date pubDate;
+
+    public Journal(Article[] contents, Date d){
+        edition = new TreeSet<Article>();
+        for(int i = 0; i < contents.length; i++){
+            edition.add(new Article(contents[i].getText(), contents[i].getAuthor()));
+        }
+        pubDate = new Date(d.getTime())
+    }
+
+    public Set<Article> getArticles(){
+        Set<Article> newEdition = new TreeSet<Article>();
+        for (Article one: edition){
+            newEdition.add(one.getText(),one.getAuthor());
+        }
+        return Collections.unmodifiableSortedSet(newEdition);
+    }
+
+    public Date getDate(){
+        return pubDate.clone();
+    }
+}
+
+iv)
+1. remove set methods
+2. make the class and all fields final
+Yes, it is necessary. Because pubDate still mutable.
+
+QA3
+-----------------------------------------
+a)
+Hash set uses an object's integer hash code to index into an array and then allocate object to associated bucket
+Tree set maintain a balanced tree of nodes, according to their natural order
+
+b)
+i)
+For HashMap: O(1)
+For TreeMap: O(logn)
+
+ii)
+For HashMap: O(1)
+For TreeMap: O(logn)
+
+c)
+i)
+Resizable array would be better. Because add at tail runs in constant time:O(1)
+II)
+linked list would be better. Because O(1) to re-arrange list: O(n)
+
+d)
+Because A set is a collection that cannot contain duplicate elements
+I would use HashSet. Because add, remove, contains and get are O(1) opertionns

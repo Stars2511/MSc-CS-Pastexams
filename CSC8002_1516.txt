@@ -270,7 +270,6 @@ Event driven programming involves writing programs whose flow of control depends
 Event handler is just a method that gets called by an event dispatcher
 The event dispatcher is a method that will call the event handler when an event occurs
 
-
 b)
 In order to set up an event handler and deal with events, a Java programmer needs to:
 1. define an event handling class that implements the appropriate "event listener" interface,

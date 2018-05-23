@@ -39,7 +39,7 @@ public final class Tutor{
     }
 
     public Set<Student> getTutees(){
-        Set newTutees = new TreeSet<Student>();
+        Set<Student> newTutees = new TreeSet<Student>();
         for(Student tutee: tutees){
             newTutees.add(new Student(tutee[i].getName(), tutee[i].getCourse())));
         }
