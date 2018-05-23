@@ -114,34 +114,40 @@ To create a new thread of concurrent activity in a Java program, the programmer 
 
 b)
 public class ThreadOne extends Thread {
-    private final static times = 100;
-    private boolean sharedLock;
-    public ThreadOne(boolean lock){
-        sharedLock = lock
+    private final static int times = 100;
+    private Object sharedLock;
+    public ThreadOne(Object lock){
+        sharedLock = lock;
     }
     public void run(){
-        for(int i = 1; i <= times; i++){
-            if(i > 50){
-                while(sharedLock){
-                    Thread.yield();
+        synchronized(sharedLock) {
+            for(int i = 1; i <= times; i++){
+                try {
+                    if(i == 50){
+                        sharedLock.wait();
+                    }
+                }catch(InterruptedException e) {
+                    System.out.println("ee");
                 }
+                System.out.println(i);
             }
-            System.out.println(i);
         }
     }
 }
 public class ThreadTwo extends Thread {
-    private final static times = 40;
-    private boolean sharedLock;
+    private final static int times = 40;
+    private Object sharedLock;
 
-    public ThreadTwo(boolean lock){
-        sharedLock = lock
+    public ThreadTwo(Object lock){
+        sharedLock = lock;
     }
     public void run(){
-        for(int i = 0; i < times; i++){
-            System.out.println("A");
+        synchronized(sharedLock) {
+            for(int i = 0; i < times; i++){
+                System.out.println("A");
+            }
+            sharedLock.notifyAll();
         }
-        sharedLock = false;
     }
 }
 public class MainThread {
@@ -179,7 +185,7 @@ public class CarPark{
     }
 
     public synchronized void acquireEnter() throws InterruptedException{
-        while(cars = capacity){
+        while(cars === capacity){
             wait();
         }
         cars++;

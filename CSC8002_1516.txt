@@ -1,0 +1,150 @@
+SECTION B
+=========================================
+QB1
+-----------------------------------------
+a)
+
+
+bc)
+public class ThreadOne extends Thread{
+    private final static int times = 10;
+
+    public ThreadOne(){
+
+    }
+
+    public void run(){
+        for(int i = 0; i < times; i++){
+            System.out.println("Hip, hip");
+        }
+    }
+}
+
+public class ThreadTwo extends Thread{
+    private final static int times = 10;
+
+    public ThreadTwo(){
+
+    }
+
+    public void run(){
+        for(int i = 0; i < times; i++){
+            System.out.println("Hooray");
+        }
+    }
+}
+
+public class MainThread{
+    public static void main(String[] args){
+        Thread one = new ThreadOne();
+        Thread two = new ThreadTwo();
+        one.start();
+        two.start();
+    }
+}
+
+QB2
+-----------------------------------------
+a)
+Monitors combine data encapsulation, mutual exclusion, and condition synchronization. The data structure encapsulated by the monitor is private, and can only be accessed via a set of public operations. Each operation acquires a lock associated with the monitor, thereby ensuring mutual exclusion and preventing interference. It is possible for operations to wait and signal conditions associated with the state of the monitor
+
+b)
+public class SafeBridge{
+    private int redcars = 0;
+    private int bluecars = 0;
+
+    public synchronized void redEnter() throws InterruputedException{
+        while(bluecars > 0){
+            wait();
+        }
+        redcars++;
+    }
+
+    public synchronized void redExit(){
+        if(redcars > 0){
+            redcars--;
+        }
+        if(redcars == 0){
+            notifyAll();
+        }
+    }
+
+    public synchronized void blueEnter() throws InterruputedException{
+        while(redcars > 0){
+            wait();
+        }
+        bluecars++;
+    }
+
+    public synchronized void blueExit(){
+        if(bluecars > 0){
+            bluecars--;
+        }
+        if(bluecars == 0){
+            notifyAll();
+        }
+    }
+}
+
+c)
+
+
+
+QB3
+-----------------------------------------
+a)
+Event driven programming involves writing programs whose flow of control depends on a sequence of external events rather than the internal control logic of the program itself.
+
+
+b)
+In order to set up an event handler and deal with events, a Java programmer needs to:
+1. define an event handling class that implements the appropriate "event listener" interface,
+2. provide the neccessary event handling code,
+3. register an instance of the event handling class with an event source by calling the appropriate "addListener" method.
+
+c)
+// import neccessary packages
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
+
+public class LengthConversion implements ActionListener{
+    private JFrame conversionFrame;
+    private JPanel conversionPanel;
+    private JTextField mileTF, kilometreTF;
+    private JButton conversionButton;
+
+    public LengthConversion(){
+        conversionFrame = new JFrame();
+        conversionPanel = new JPanel();
+        addWidgets();
+        conversionFrame.setContentPane(conversionPanel);
+        conversionFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        conversionFrame.pack();
+        conversionFrame.setVisible(true);
+    }
+
+    public void addWidgets(){
+        mileTF = new JTextField(10);
+        kilometreTF = new JTextField(10);
+        conversionButton = new JButton("Convert");
+        conversionButton.addActionListener(this);
+        conversionPanel.add(mileTF);
+        conversionPanel.add(kilometreTF);
+        conversionPanel.add(conversionButton);
+    }
+
+    public void actionPerformed(ActionEvent e){
+        double kilo = 0;
+        double mile = (double)Double.parseDouble(mileTF.getText());
+
+        kilo = mile* 1.609;
+        kilometreTF.setText(""+kilo);
+    }
+
+    public static void main(String[] args){
+        LengthConversion conversion = new LengthConversion();
+    } 
+}
+
