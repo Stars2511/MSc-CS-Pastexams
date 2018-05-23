@@ -267,6 +267,8 @@ Event driven programming involves writing programs whose flow of control depends
 3. Pass control to event dispatcher and wait for events to occur
 4. When event occurs, event dispatcher calls the appropriate event handler
 5. Event handler executes and then returns control to event dispatcher
+Event handler is just a method that gets called by an event dispatcher
+The event dispatcher is a method that will call the event handler when an event occurs
 
 
 b)
