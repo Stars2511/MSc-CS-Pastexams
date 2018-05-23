@@ -88,7 +88,7 @@ public final class Journal{
     public Set<Article> getArticles(){
         Set<Article> newEdition = new TreeSet<Article>();
         for (Article one: edition){
-            newEdition.add(one.getText(),one.getAuthor());
+            newEdition.add(new Aritcle(one.getText(),one.getAuthor());
         }
         return Collections.unmodifiableSortedSet(newEdition);
     }
