@@ -52,7 +52,7 @@ public final class Tutor{
 }
 iv)
 1. Remove set methods that modify object state
-2. Make all fields final
+2. Make the class and all fields final
 Yes, it's neccessary to re-write the Tutor class. Because tutees is still mutable.
 
 QA2
@@ -203,7 +203,11 @@ QB3
 -----------------------------------------
 a)
 Event driven programming involves writing programs whose flow of control depends on a sequence of external events rather than the internal control logic of the program itself.
-
+1. Declare appropriate event handlers
+2. Register event handlers with event dispatching mechanism
+3. Pass control to event dispatcher and wait for events to occur
+4. When event occurs, event dispatcher calls the appropriate event handler
+5. Event handler executes and then returns control to event dispatcher
 
 b)
 In order to set up an event handler and deal with events, a Java programmer needs to:

@@ -11,4 +11,5 @@ That means method fin() cannot be overidden.
 No. Java doesn't allow abstract final methods.
 Because abstract methods compulsory we should override in child classes to provide implementation. Where as we can't override final methods. Here final, abstract combination is illegal combination for methods.
 
-b
+c)
+the use of super() to call the constructor of the superclass.

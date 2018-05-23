@@ -1,43 +1,195 @@
+SECTION A
+=========================================
+QA1
+-----------------------------------------
+a)
+If you pass a parameter of a type that is mutable, then if you just copy that straight into the class then you can change it - i.e give access to internal state - def copying is making a copy of that parameter before storing it internally
+
+b)
+a class is immutable if its instances cannot be motified
+Advantages:
+1. Immutables are simple and make good building blocks
+2. Immutables can be cached
+3. Immutables are thread-safe.
+
+c)
+i)
+final class: one that you can't inherit from
+final field: one initialized can't be changed
+
+ii)
+For Author:
+1. it provides set methods
+2. the field can be changed after initialized
+For Book:
+Book does not defensively copy
+
+iii)
+public final class Book{
+    private final Author author;
+    private final String title;
+    private final Date datePublished;
+
+    public Book(Author author, String title, Date datePublished){
+        this.author = new Author(author.getFirstName(), author.getLastName());
+        this.title = title;
+        this.datePublished = new Date(datePublished.getTime());
+    }
+
+    public Author getAuthor(){
+        return new Author(author.getFirstName(), author.getLastName());
+    }
+
+    public String getTitle(){
+        return title;
+    }
+
+    public Date getDatePublished(){
+        return (Date) datePublished.clone();
+    }
+}
+
+iv)
+make the class and member fields final and remove set methods
+Yes, because datePublished is still mutable.
+
+QA2
+-----------------------------------------
+a)
+Object factories are used in the Collections framework to provide wrapper implementations such as unmodifiable and thread-safe synchronized views of an underlying collection.
+
+b)
+1. static factory methods can have more meaningful names
+2. static factory methods are not required to create a new object each time they are invoked
+3. static factory methods can return an object of any subtype of their return type
+
+c)
+i)
+No need to define an interface because ModuleCode is final -> there will only ever be one implementation
+
+ii)
+1. prefix should be non-null and not empty(length>0), can specify length == 3. Throw NullPointerException if prefix is null. Throw IllegalArgumentException if prefix is empty or does not comply with specified length (can throw NullPointerException as side effect of checking not empty).
+2. number should be >0(can also specify should be exactly 4 digits - in range 1000 to 9999 for Newcastle codes). Throw IllegalArgumentException if not in range.
+
+iii)
+public final class ModuleCode{
+    private final String prefix;
+    private final int number;
+    private static final Map<String, ModuleCode> CODES = new HashMap<String, ModuleCode>();
+
+    private ModuleCode(String prefix, int number){
+        this.prefix = prefix;
+        this.number = number;
+    }
+
+    public static ModuleCode getInstance(String prefix, int number){
+        final String code = prefix + number;
+        if(!CODES.containsKey(code)){
+            CODES.put(code,new ModuleCode(prefix,number));
+        }
+
+        return CODES.get(code);
+    }
+
+    public String getPrefix(){return prefix;}
+    public int getNumber(){return number;}
+}
+
+iv)
+No, it's unnecessary.
+1. if you override equals, you must override hashCode.
+2. Because of getInstance method, if two instance have same prefix and number, they refer to the same object.
+
+QA3
+-----------------------------------------
+a)
+Doubly linked list of nodes with a value and references to next and previous node (see LinkedList)
+
+b)
+i)
+For resizable array: O(1)
+For doubly linked list: O(n) for list of size n.
+
+ii)
+For resizable array: O(n) for list of size n
+For doubly linked list: O(1)
+
+iii)
+For resizable array: O(1) to get there, average n/2 to re-arrange list: O(n)
+For doubly linked list: average n/2 to get there, O(1) to re-arrange list: O(n)
+
+c)
+For the worst-case, you need remove all members.
+For array list, the whole time would be O((n2 - n)/2) -> O(n2)
+For linked list, add or removal run in constant time O(1).
+so linked list would be better.
+
+d)
+
+
+
 SECTION B
 =========================================
 QB1
 -----------------------------------------
 a)
-
+New: a thread was created as an object, but has not yet started
+RUNNABLE: a thread is executing in the Java virtual machine or waiting for resources from the operating system such as processor
+BLOCKED: a thread is waiting for resources such as locks
+WAITING: a thread is in the waiting state due to calling method like Object.wait or Thread.join. It is waiting for another thread to perform a particular action to release it from waiting
+TIMED_WAITING: a thread is in the timed waiting state due to calling methods with a specified positive waiting ime like Object.wait with timeout or Thread.join with timeout or Thread.sleep
+TERMINATED: a thread that has exited is in this state
+Object.wait, Thread.join and Thread.sleep
 
 bc)
 public class ThreadOne extends Thread{
-    private final static int times = 10;
+    private final int times;
+    private Object lock;
 
-    public ThreadOne(){
-
+    public ThreadOne(int times, Object lock){
+        this.times = times;
+        this.lock = lock;
     }
 
     public void run(){
-        for(int i = 0; i < times; i++){
-            System.out.println("Hip, hip");
+        synchronized(lock){
+            try{
+                lock.wait();
+                for(int i = 0; i < times; i++){
+                    System.out.println("Hip, hip");
+                }
+            }catch(InterruptedException e){
+                System.out.println("Interrupt");
+            }
         }
     }
 }
 
 public class ThreadTwo extends Thread{
-    private final static int times = 10;
+    private final int times;
+    private Object lock;
 
-    public ThreadTwo(){
-
+    public ThreadTwo(int times, Object lock){
+        this.times = times;
+        this.lock = lock;
     }
 
     public void run(){
-        for(int i = 0; i < times; i++){
-            System.out.println("Hooray");
+        synchronized(lock){
+            for(int i = 0; i < times; i++){
+                System.out.println("Hooray");
+            }
+            lock.notify();
         }
     }
 }
 
 public class MainThread{
     public static void main(String[] args){
-        Thread one = new ThreadOne();
-        Thread two = new ThreadTwo();
+        final Object lock = new Object();
+        final int times = 10;
+        Thread one = new ThreadOne(times, lock);
+        Thread two = new ThreadTwo(times, lock);
         one.start();
         two.start();
     }
@@ -87,13 +239,34 @@ public class SafeBridge{
 }
 
 c)
+public class RedCar implements Runnable{
+    private SafeBridge bridge;
 
+    public RedCar(SafeBridge bridge){
+        this.bridge = bridge;
+    }
+
+    public void run(){
+        try{
+            bridge.redEnter();
+            Thread.sleep(5000);
+            bridge.redExit();
+        }catch(InterruptedException e){
+
+        }
+    }
+}
 
 
 QB3
 -----------------------------------------
 a)
 Event driven programming involves writing programs whose flow of control depends on a sequence of external events rather than the internal control logic of the program itself.
+1. Declare appropriate event handlers
+2. Register event handlers with event dispatching mechanism
+3. Pass control to event dispatcher and wait for events to occur
+4. When event occurs, event dispatcher calls the appropriate event handler
+5. Event handler executes and then returns control to event dispatcher
 
 
 b)
