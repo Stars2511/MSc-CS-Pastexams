@@ -127,3 +127,169 @@ linked list would be better. Because O(1) to re-arrange list: O(n)
 d)
 Because A set is a collection that cannot contain duplicate elements
 I would use HashSet. Because add, remove, contains and get are O(1) opertionns
+
+SECTION B
+=========================================
+QB1
+-----------------------------------------
+a)
+To create a new Thread of concurrent activity in Java program, the programmer must:
+1. Define a new class that extends Thread or implements Runnable
+2. Provide a suitable implementation of a run method
+3. Create an instance of the new class(and an instance of Thread if necessary)
+4. Invoke the start method on the thread object
+
+b)
+public class PrintChar extends Thread{
+    private final int times;
+    private final char letter
+
+    public ThreadOne(int times, char letter){
+        this.times = times;
+        this.letter = letter;
+    }
+    public void run(){
+        for(int i=0; i<times;i++){
+            System.out.println(letter);
+        }
+    }
+}
+
+public class PrintNum extends Thread{
+    private final int start;
+    private final int end;
+
+    public PrintNum(int start, int end){
+        this.start = start;
+        this.end = end
+    }
+
+    public void run(){
+        for(int i = start; i <= end; i++){
+            System.out.print(" "+i);
+        }
+    }
+}
+
+public class MainThread{
+    public static void main(String[] args){
+        Thread one = new PrintChar(10,'X');
+        Thread two = new PrintChar(5,'Y');
+        THread three = new PrintNum(2,8);
+        one.start();
+        two.start();
+        three.start();
+    }
+}
+
+c)
+Two threads can access the same object if:
+1. it is a global (static) object;
+2. the object is defined in an enclosing scope(the threads are nested class)
+3. the object's reference is passed as an argument to each thread
+To prevent interference, one needs to ensure that all accesses to the shared object are from within a critical section, implemented using the Java keyword synchronized.
+
+QB2
+-----------------------------------------
+a)
+Monitors combine data encapsulation, mutal exclusion, and condition synchronization. The data structure encapsulated by the monitor is private, and can only be accessed via a set of public operations. Each operation acquires a lock associated with the monitor, thereby ensuring mutual exclusion and preventing interference. It is possible for operations to wait and signal conditions associated with the state of the monitor
+
+b)
+public class Fund{
+    private int money;
+
+    public Fund(){
+        money = 0;
+    }
+
+    public synchronized void acquireGrants(int grant){
+        while(money < grant){
+            wait();
+        }
+        money = money - grant;
+    }
+
+    public synchronized void releaseGrants(int grant){
+        money = money + grant;
+        notifyAll();
+    }
+}
+
+c)
+public class Student extends Thread{
+    private Fund fund;
+
+    public Student(Fund fund){
+        this.fund = fund;
+    }
+
+    public void run(){
+
+    }
+}
+
+QB3
+-----------------------------------------
+a)
+Event driven programming involves writing programs whose flow of control depends on a sequence of external events rather than the internal control logic of the program itself
+
+b)
+In order to set up an event handler and deal with events, a Java programmer needd to:
+1. define an event handling class that implements the appropriate 'event listener' interference
+2. provide the necessary event handling code,
+3. register an instance of the event handling class with an event source by calling the appropriate "addListener" method.
+
+c)
+// import necessary package
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Rectangle implements ActionListener{
+    private JFrame rectangleFrame;
+    private JPanel rectanglePanel;
+    private JLabel widthL, lengthL, areaL;
+    private JTextField widthTF, lengthTF;
+    private JButton button;
+
+    public Rectangle(){
+        rectangleFrame = new JFrame();
+        rectanglePanel = new JPanel();
+        addWidgets();
+        rectangleFrame.setContentPane(rectanglePanel);
+        rectangleFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        rectangleFrame.pack();
+        rectangleFrame.setVisible(true);
+    }
+
+    public void addWidgets(){
+        widthTF = new JTextField(10);
+        lengthTF = new JTextField(10);
+        areaL = new JLabel();
+        widthL = new JLabel("width");
+        lengthL = new JLabel("length");
+        button = new JButton("Calculate");
+        button.addActionListener(this);
+        rectanglePanel.add(widthL);
+        rectanglePanel.add(widthTF);
+        rectanglePanel.add(lengthL);
+        rectanglePanel.add(lengthTF);
+        rectanglePanel.add(button);
+        rectanglePanel.add(areaL);
+    }
+
+    public void actionPerformed(ActionEvent e){
+        String width = widthTF.getText();
+        String length = lengthTF.getText();
+        double area = (double)(Double.parseDouble(width) * Double.parseDouble(length));
+        areaL.setText("The area is " + area);
+    }
+
+    public static void main(String[] args){
+        Rectangle r = new Rectangle();
+    }
+
+}
+
+
+

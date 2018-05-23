@@ -140,7 +140,7 @@ QB1
 a)
 To create a new thread of concurrent activity in a Java program, the programmer must:
 1. Define a new class that extends Thread or implements Runnable
-2. Provide a suitable implementation of a run methods
+2. Provide a suitable implementation of a run method   
 3. Create an instance of the new class (and an instance of Thread if neccessary)
 4. Invoke the start method on the thread object
 
@@ -206,6 +206,7 @@ a)
 Monitors combine data encapsulation, mutual exclusion, and condition synchronization. The data structure encapsulated by the monitor is private, and can only be accessed via a set of public operations. Each operation acquires a lock associated with the monitor, thereby ensuring mutual exclusion and preventing interference. It is possible for operations to wait and signal conditions associated with the state of the monitor
 
 b)
+A monitor is a mechanism for ensuring that a shared data structure can be accessed concurrently without interference.
 
 c)
 public class CarPark{
@@ -218,7 +219,7 @@ public class CarPark{
 
     public synchronized void acquireEnter() throws InterruptedException{
         while(cars === capacity){
-            wait();
+            wait();  
         }
         cars++;
     }
