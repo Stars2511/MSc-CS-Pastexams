@@ -1,0 +1,30 @@
+Q1
+-----------------------------------------
+PAN:
+LAN: Local Area Networks
+WAN: Wide Area Networks
+MAN:
+PDU:
+
+Q2
+-----------------------------------------
+A: Piconet
+B: Active slave
+C: Bridge slave
+D: Parked slave
+
+Q3
+-----------------------------------------
+00110100
+00010001
+
+Q4
+-----------------------------------------
+* Under light load, contention is preferable due to its low delay(collision-free methods have a longer delay)
+* As load increases, contention becomes increasingly less attractive. Collision-free methods have a better channel efficiency.
+* Limited contention protocols would be better because it combines the best properties of the contention and collision-free protocols, it uses contention at low loads to provide low delay, but uses a collision-free technique at high loads to provide good channel efficiency.
+
+Q8
+-----------------------------------------
+010001111110001111100000111000001110000001111110
+01000111110100011011111010111000000111110
